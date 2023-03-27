@@ -49,11 +49,35 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CTHoaDonBan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CTHoaDonBan.Designer.cs">
+      <DependentUpon>CTHoaDonBan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CTHoaDonNhap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CTHoaDonNhap.Designer.cs">
+      <DependentUpon>CTHoaDonNhap.cs</DependentUpon>
+    </Compile>
     <Compile Include="HoaDonBan.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="HoaDonBan.Designer.cs">
       <DependentUpon>HoaDonBan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HoaDonNhap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HoaDonNhap.Designer.cs">
+      <DependentUpon>HoaDonNhap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MatHang.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MatHang.Designer.cs">
+      <DependentUpon>MatHang.cs</DependentUpon>
     </Compile>
     <Compile Include="TrangChu.cs">
       <SubType>Form</SubType>
@@ -69,8 +93,20 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="CTHoaDonBan.resx">
+      <DependentUpon>CTHoaDonBan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CTHoaDonNhap.resx">
+      <DependentUpon>CTHoaDonNhap.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="HoaDonBan.resx">
       <DependentUpon>HoaDonBan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HoaDonNhap.resx">
+      <DependentUpon>HoaDonNhap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MatHang.resx">
+      <DependentUpon>MatHang.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TrangChu.resx">
       <DependentUpon>TrangChu.cs</DependentUpon>

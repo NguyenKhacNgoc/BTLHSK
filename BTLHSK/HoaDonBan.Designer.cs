@@ -28,18 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lbMaHD = new System.Windows.Forms.Label();
-            this.lbMaNV = new System.Windows.Forms.Label();
+            this.lbTenNV = new System.Windows.Forms.Label();
             this.lbNgayTao = new System.Windows.Forms.Label();
             this.tbMaHD = new System.Windows.Forms.TextBox();
             this.dateTimePickerNgayTao = new System.Windows.Forms.DateTimePicker();
             this.dataGridViewHDB = new System.Windows.Forms.DataGridView();
-            this.cbMaNV = new System.Windows.Forms.ComboBox();
+            this.cbTenNV = new System.Windows.Forms.ComboBox();
             this.btnThem = new System.Windows.Forms.Button();
             this.btnSua = new System.Windows.Forms.Button();
             this.btnXoa = new System.Windows.Forms.Button();
             this.btnTK = new System.Windows.Forms.Button();
+            this.errorProviderMaHD = new System.Windows.Forms.ErrorProvider(this.components);
+            this.errorProviderMaNV = new System.Windows.Forms.ErrorProvider(this.components);
+            this.btnXemCT = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewHDB)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderMaHD)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderMaNV)).BeginInit();
             this.SuspendLayout();
             // 
             // lbMaHD
@@ -51,14 +57,14 @@
             this.lbMaHD.TabIndex = 0;
             this.lbMaHD.Text = "Mã Hoá Đơn";
             // 
-            // lbMaNV
+            // lbTenNV
             // 
-            this.lbMaNV.AutoSize = true;
-            this.lbMaNV.Location = new System.Drawing.Point(250, 24);
-            this.lbMaNV.Name = "lbMaNV";
-            this.lbMaNV.Size = new System.Drawing.Size(91, 16);
-            this.lbMaNV.TabIndex = 1;
-            this.lbMaNV.Text = "Mã Nhân Viên";
+            this.lbTenNV.AutoSize = true;
+            this.lbTenNV.Location = new System.Drawing.Point(250, 24);
+            this.lbTenNV.Name = "lbTenNV";
+            this.lbTenNV.Size = new System.Drawing.Size(91, 16);
+            this.lbTenNV.TabIndex = 1;
+            this.lbTenNV.Text = "Tên nhân viên";
             // 
             // lbNgayTao
             // 
@@ -75,6 +81,7 @@
             this.tbMaHD.Name = "tbMaHD";
             this.tbMaHD.Size = new System.Drawing.Size(100, 22);
             this.tbMaHD.TabIndex = 3;
+            this.tbMaHD.Validating += new System.ComponentModel.CancelEventHandler(this.tbMaHD_Validating);
             // 
             // dateTimePickerNgayTao
             // 
@@ -86,24 +93,26 @@
             // dataGridViewHDB
             // 
             this.dataGridViewHDB.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewHDB.Location = new System.Drawing.Point(15, 71);
+            this.dataGridViewHDB.Location = new System.Drawing.Point(15, 52);
             this.dataGridViewHDB.Name = "dataGridViewHDB";
             this.dataGridViewHDB.RowHeadersWidth = 51;
             this.dataGridViewHDB.RowTemplate.Height = 24;
-            this.dataGridViewHDB.Size = new System.Drawing.Size(773, 272);
+            this.dataGridViewHDB.Size = new System.Drawing.Size(1120, 384);
             this.dataGridViewHDB.TabIndex = 6;
+            this.dataGridViewHDB.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewHDB_CellClick);
             // 
-            // cbMaNV
+            // cbTenNV
             // 
-            this.cbMaNV.FormattingEnabled = true;
-            this.cbMaNV.Location = new System.Drawing.Point(347, 21);
-            this.cbMaNV.Name = "cbMaNV";
-            this.cbMaNV.Size = new System.Drawing.Size(121, 24);
-            this.cbMaNV.TabIndex = 7;
+            this.cbTenNV.FormattingEnabled = true;
+            this.cbTenNV.Location = new System.Drawing.Point(347, 21);
+            this.cbTenNV.Name = "cbTenNV";
+            this.cbTenNV.Size = new System.Drawing.Size(121, 24);
+            this.cbTenNV.TabIndex = 7;
+            this.cbTenNV.Validating += new System.ComponentModel.CancelEventHandler(this.cbMaNV_Validating);
             // 
             // btnThem
             // 
-            this.btnThem.Location = new System.Drawing.Point(15, 379);
+            this.btnThem.Location = new System.Drawing.Point(15, 455);
             this.btnThem.Name = "btnThem";
             this.btnThem.Size = new System.Drawing.Size(114, 39);
             this.btnThem.TabIndex = 8;
@@ -113,7 +122,7 @@
             // 
             // btnSua
             // 
-            this.btnSua.Location = new System.Drawing.Point(212, 380);
+            this.btnSua.Location = new System.Drawing.Point(189, 455);
             this.btnSua.Name = "btnSua";
             this.btnSua.Size = new System.Drawing.Size(129, 38);
             this.btnSua.TabIndex = 9;
@@ -123,7 +132,7 @@
             // 
             // btnXoa
             // 
-            this.btnXoa.Location = new System.Drawing.Point(446, 380);
+            this.btnXoa.Location = new System.Drawing.Point(380, 455);
             this.btnXoa.Name = "btnXoa";
             this.btnXoa.Size = new System.Drawing.Size(118, 38);
             this.btnXoa.TabIndex = 10;
@@ -133,7 +142,7 @@
             // 
             // btnTK
             // 
-            this.btnTK.Location = new System.Drawing.Point(622, 380);
+            this.btnTK.Location = new System.Drawing.Point(575, 455);
             this.btnTK.Name = "btnTK";
             this.btnTK.Size = new System.Drawing.Size(113, 38);
             this.btnTK.TabIndex = 11;
@@ -141,26 +150,47 @@
             this.btnTK.UseVisualStyleBackColor = true;
             this.btnTK.Click += new System.EventHandler(this.btnTK_Click);
             // 
+            // errorProviderMaHD
+            // 
+            this.errorProviderMaHD.ContainerControl = this;
+            // 
+            // errorProviderMaNV
+            // 
+            this.errorProviderMaNV.ContainerControl = this;
+            // 
+            // btnXemCT
+            // 
+            this.btnXemCT.Location = new System.Drawing.Point(758, 455);
+            this.btnXemCT.Name = "btnXemCT";
+            this.btnXemCT.Size = new System.Drawing.Size(101, 38);
+            this.btnXemCT.TabIndex = 12;
+            this.btnXemCT.Text = "Xem chi tiết";
+            this.btnXemCT.UseVisualStyleBackColor = true;
+            this.btnXemCT.Click += new System.EventHandler(this.btnXemCT_Click_1);
+            // 
             // HoaDonBan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1147, 521);
+            this.Controls.Add(this.btnXemCT);
             this.Controls.Add(this.btnTK);
             this.Controls.Add(this.btnXoa);
             this.Controls.Add(this.btnSua);
             this.Controls.Add(this.btnThem);
-            this.Controls.Add(this.cbMaNV);
+            this.Controls.Add(this.cbTenNV);
             this.Controls.Add(this.dataGridViewHDB);
             this.Controls.Add(this.dateTimePickerNgayTao);
             this.Controls.Add(this.tbMaHD);
             this.Controls.Add(this.lbNgayTao);
-            this.Controls.Add(this.lbMaNV);
+            this.Controls.Add(this.lbTenNV);
             this.Controls.Add(this.lbMaHD);
             this.Name = "HoaDonBan";
             this.Text = "HoaDonBan";
             this.Load += new System.EventHandler(this.HoaDonBan_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewHDB)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderMaHD)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderMaNV)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -169,15 +199,18 @@
         #endregion
 
         private System.Windows.Forms.Label lbMaHD;
-        private System.Windows.Forms.Label lbMaNV;
+        private System.Windows.Forms.Label lbTenNV;
         private System.Windows.Forms.Label lbNgayTao;
         private System.Windows.Forms.TextBox tbMaHD;
         private System.Windows.Forms.DateTimePicker dateTimePickerNgayTao;
         private System.Windows.Forms.DataGridView dataGridViewHDB;
-        private System.Windows.Forms.ComboBox cbMaNV;
+        private System.Windows.Forms.ComboBox cbTenNV;
         private System.Windows.Forms.Button btnThem;
         private System.Windows.Forms.Button btnSua;
         private System.Windows.Forms.Button btnXoa;
         private System.Windows.Forms.Button btnTK;
+        private System.Windows.Forms.ErrorProvider errorProviderMaHD;
+        private System.Windows.Forms.ErrorProvider errorProviderMaNV;
+        private System.Windows.Forms.Button btnXemCT;
     }
 }

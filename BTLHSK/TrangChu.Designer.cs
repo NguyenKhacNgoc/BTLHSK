@@ -31,7 +31,6 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.mnQL = new System.Windows.Forms.ToolStripMenuItem();
             this.mnNV = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnLH = new System.Windows.Forms.ToolStripMenuItem();
             this.mnMH = new System.Windows.Forms.ToolStripMenuItem();
             this.mnHDN = new System.Windows.Forms.ToolStripMenuItem();
             this.mnCTHDN = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,7 +48,7 @@
             this.mnThoat});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1395, 28);
             this.menuStrip1.TabIndex = 8;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -57,7 +56,6 @@
             // 
             this.mnQL.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnNV,
-            this.mnLH,
             this.mnMH,
             this.mnHDN,
             this.mnCTHDN,
@@ -74,29 +72,26 @@
             this.mnNV.Text = "Nhân Viên";
             this.mnNV.Click += new System.EventHandler(this.mnNV_Click);
             // 
-            // mnLH
-            // 
-            this.mnLH.Name = "mnLH";
-            this.mnLH.Size = new System.Drawing.Size(246, 26);
-            this.mnLH.Text = "Loại Hàng";
-            // 
             // mnMH
             // 
             this.mnMH.Name = "mnMH";
             this.mnMH.Size = new System.Drawing.Size(246, 26);
             this.mnMH.Text = "Mặt Hàng";
+            this.mnMH.Click += new System.EventHandler(this.mnMH_Click);
             // 
             // mnHDN
             // 
             this.mnHDN.Name = "mnHDN";
             this.mnHDN.Size = new System.Drawing.Size(246, 26);
             this.mnHDN.Text = "Hoá Đơn Nhập";
+            this.mnHDN.Click += new System.EventHandler(this.mnHDN_Click);
             // 
             // mnCTHDN
             // 
             this.mnCTHDN.Name = "mnCTHDN";
             this.mnCTHDN.Size = new System.Drawing.Size(246, 26);
             this.mnCTHDN.Text = "Chi Tiết Hoá Đơn Nhập";
+            this.mnCTHDN.Click += new System.EventHandler(this.mnCTHDN_Click);
             // 
             // mnHDB
             // 
@@ -110,6 +105,7 @@
             this.mnCTHDB.Name = "mnCTHDB";
             this.mnCTHDB.Size = new System.Drawing.Size(246, 26);
             this.mnCTHDB.Text = "Chi Tiết Hoá Đơn Bán";
+            this.mnCTHDB.Click += new System.EventHandler(this.mnCTHDB_Click);
             // 
             // mnThoat
             // 
@@ -122,7 +118,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1395, 669);
             this.Controls.Add(this.menuStrip1);
             this.IsMdiContainer = true;
             this.Name = "TrangChu";
@@ -141,7 +137,6 @@
         private System.Windows.Forms.ToolStripMenuItem mnQL;
         private System.Windows.Forms.ToolStripMenuItem mnThoat;
         private System.Windows.Forms.ToolStripMenuItem mnNV;
-        private System.Windows.Forms.ToolStripMenuItem mnLH;
         private System.Windows.Forms.ToolStripMenuItem mnMH;
         private System.Windows.Forms.ToolStripMenuItem mnHDN;
         private System.Windows.Forms.ToolStripMenuItem mnCTHDN;

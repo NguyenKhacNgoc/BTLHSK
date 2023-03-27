@@ -21,23 +21,24 @@ namespace BTLHSK
 
         private void HoaDonBan_Load(object sender, EventArgs e)
         {
-            ComboboxMaNV();
+            ComboboxTenNV();
             HienHoaDonBan(sender, e);
             
 
         }
-        private void ComboboxMaNV()
+       
+        private void ComboboxTenNV()
         {
             using (SqlConnection cnn = new SqlConnection(str))
             {
                 cnn.Open();
-                using (SqlCommand cmd = new SqlCommand("select iMaNV from tblNhanVien", cnn))
+                using (SqlCommand cmd = new SqlCommand("select sTen from tblNhanVien", cnn))
                 {
                     using (SqlDataReader rdr = cmd.ExecuteReader())
                     {
                         while(rdr.Read())
                         {
-                            cbMaNV.Items.Add(rdr["iMaNV"].ToString());
+                            cbTenNV.Items.Add(rdr["sTen"].ToString());
                         }
                     }
 
@@ -48,7 +49,7 @@ namespace BTLHSK
         {
             using (SqlConnection cnn = new SqlConnection(str)){
                 cnn.Open();
-                using (SqlDataAdapter dataAdapter = new SqlDataAdapter("Select * from tblHoaDonBan", cnn))
+                using (SqlDataAdapter dataAdapter = new SqlDataAdapter("Select * from v_HDB", cnn))
                 {
                     DataTable dataTable= new DataTable();
                     dataAdapter.Fill(dataTable);
@@ -62,106 +63,190 @@ namespace BTLHSK
 
         private void btnThem_Click(object sender, EventArgs e)
         {
-            int MaHD = Convert.ToInt32(tbMaHD.Text);
-            int MaNV = Convert.ToInt32(cbMaNV.Text);
-            DateTime NgayTao = Convert.ToDateTime(dateTimePickerNgayTao.Text);
-            using (SqlConnection cnn = new SqlConnection(str))
+            
+            try
             {
-                cnn.Open();
-                using (SqlCommand cmd = cnn.CreateCommand())
+                
+                using (SqlConnection cnn = new SqlConnection(str))
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.CommandText = "ThemHoaDonBan";
-                    cmd.Parameters.AddWithValue("@MaHD", MaHD);
-                    cmd.Parameters.AddWithValue("@MaNV", MaNV);
-                    cmd.Parameters.AddWithValue("@NgayTao",NgayTao);
-                    int i = cmd.ExecuteNonQuery();
-                    if (i > 0) HienHoaDonBan(sender, e);
-                }
-                
+                    cnn.Open();
+                    using (SqlCommand cmd = cnn.CreateCommand())
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.CommandText = "ThemHoaDonBan";
+                        cmd.Parameters.AddWithValue("@MaHD", tbMaHD.Text);
+                        cmd.Parameters.AddWithValue("@TenNV", cbTenNV.Text);
+                        cmd.Parameters.AddWithValue("@NgayTao", dateTimePickerNgayTao.Text);
+                        int i = cmd.ExecuteNonQuery();
+                        if (i > 0) HienHoaDonBan(sender, e);
+                    }
 
-                
+
+
+                }
+
             }
+            catch
+            {
+                MessageBox.Show("Đã có lỗi trong quá trình thên dữ liệu, vui lòng xem lại", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
         }
 
         private void btnSua_Click(object sender, EventArgs e)
         {
-            int MaHD = Convert.ToInt32(tbMaHD.Text);
-            int MaNV = Convert.ToInt32(cbMaNV.Text);
-            DateTime NgayTao = Convert.ToDateTime(dateTimePickerNgayTao.Text);
-            using (SqlConnection cnn = new SqlConnection(str))
+            
+            try
             {
-                cnn.Open();
-                using (SqlCommand cmd = cnn.CreateCommand())
+                using (SqlConnection cnn = new SqlConnection(str))
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.CommandText = "SuaHoaDonBan";
-                    cmd.Parameters.AddWithValue("@MaHD", MaHD);
-                    cmd.Parameters.AddWithValue("@MaNV", MaNV);
-                    cmd.Parameters.AddWithValue("@NgayTao", NgayTao);
-                    int i = cmd.ExecuteNonQuery();
-                    if (i > 0) HienHoaDonBan(sender, e);
+                    cnn.Open();
+                    using (SqlCommand cmd = cnn.CreateCommand())
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.CommandText = "SuaHoaDonBan";
+                        cmd.Parameters.AddWithValue("@MaHD", tbMaHD.Text);
+                        
+                        cmd.Parameters.AddWithValue("@NgayTao", dateTimePickerNgayTao.Text);
+                        int i = cmd.ExecuteNonQuery();
+                        if (i > 0) HienHoaDonBan(sender, e);
+                    }
+
+
+
                 }
 
-
-
             }
+            catch
+            {
+                MessageBox.Show("Đã có lỗi trong quá trình sửa dữ liệu, vui lòng xem lại", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
 
         }
 
         private void btnXoa_Click(object sender, EventArgs e)
         {
-            int MaHD = Convert.ToInt32(tbMaHD.Text);
-            
-            using (SqlConnection cnn = new SqlConnection(str))
+       
+           
+            try
             {
-                cnn.Open();
-                using (SqlCommand cmd = cnn.CreateCommand())
+                int MaHD = Convert.ToInt32(tbMaHD.Text);
+                using (SqlConnection cnn = new SqlConnection(str))
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.CommandText = "XoaHoaDonBan";
-                    cmd.Parameters.AddWithValue("@MaHD", MaHD);
-    
-                    int i = cmd.ExecuteNonQuery();
-                    if (i > 0) HienHoaDonBan(sender, e);
+                    cnn.Open();
+                    using (SqlCommand cmd = cnn.CreateCommand())
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.CommandText = "XoaHoaDonBan";
+                        cmd.Parameters.AddWithValue("@MaHD", MaHD);
+                        int i = cmd.ExecuteNonQuery();
+                        if (i > 0) HienHoaDonBan(sender, e);
+
+                    }
+
+
+
                 }
 
-
-
             }
+            catch
+            {
+                MessageBox.Show("Đã có lỗi trong quá trình xoá dữ liệu, vui lòng xem lại", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
         }
 
         private void btnTK_Click(object sender, EventArgs e)
         {
-            int MaHD = Convert.ToInt32(tbMaHD.Text);
-            if (string.IsNullOrEmpty(tbMaHD.Text))
+            
+            try
             {
-                HienHoaDonBan(sender, e);
+                int MaHD = Convert.ToInt32(tbMaHD.Text);
+                if (string.IsNullOrEmpty(tbMaHD.Text))
+                {
+                    HienHoaDonBan(sender, e);
 
+                }
+                else
+                {
+
+                    using (SqlConnection cnn = new SqlConnection(str))
+                    {
+                        using (SqlCommand cmd = new SqlCommand("select * from v_HDB", cnn))
+                        {
+                            using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                            {
+                                DataTable tb = new DataTable();
+                                da.Fill(tb);
+                                dataGridViewHDB.DataSource = tb;
+
+                                DataView dv = new DataView(tb);
+                                dv.RowFilter = string.Format("[Mã Hoá Đơn] = '{0}'", MaHD);
+                                dataGridViewHDB.DataSource = dv;
+
+
+                            }
+
+                        }
+                    }
+
+                }
+
+            }
+            catch
+            {
+                MessageBox.Show("Đã có lỗi xảy ra, vui lòng xem lại", "Không thành công", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
+            
+        }
+
+       
+
+        private void dataGridViewHDB_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+                tbMaHD.Text = dataGridViewHDB.CurrentRow.Cells["Mã Hoá Đơn"].Value.ToString();
+        }
+
+        private void tbMaHD_Validating(object sender, CancelEventArgs e)
+        {
+            int MaHD;
+            bool result = int.TryParse(tbMaHD.Text, out MaHD);
+            
+            if (result)
+            {
+                errorProviderMaHD.SetError(tbMaHD, "");
             }
             else
             {
+                errorProviderMaHD.SetError(tbMaHD, "Mã Hoá Đơn là số nguyên");
 
-                using (SqlConnection cnn = new SqlConnection(str))
-                {
-                    using (SqlCommand cmd = new SqlCommand("select * from tblHoaDonBan", cnn))
-                    {
-                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
-                        {
-                            DataTable tb = new DataTable();
-                            da.Fill(tb);
-                            dataGridViewHDB.DataSource = tb;
-
-                            DataView dv = new DataView(tb);
-                            dv.RowFilter = string.Format("iMaHD = '{0}'", MaHD);
-                            dataGridViewHDB.DataSource = dv;
-
-                        }
-
-                    }
-                }
             }
             
+            
+        }
+
+        private void cbMaNV_Validating(object sender, CancelEventArgs e)
+        {
+            if (cbTenNV.Text == "")
+            {
+                errorProviderMaNV.SetError(cbTenNV, "Không được để trống");
+
+            }
+            else errorProviderMaNV.SetError(cbTenNV, "");
+        }
+
+        private void btnXemCT_Click_1(object sender, EventArgs e)
+        {
+            int MaHD = (int)dataGridViewHDB.SelectedRows[0].Cells["Mã Hoá Đơn"].Value;
+            CTHoaDonBan xem = new CTHoaDonBan(MaHD);
+            xem.XemCTHDB(MaHD);
+            xem.ShowDialog();
+           
+            
+
+
         }
     }
 }
