@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.lbMaHD = new System.Windows.Forms.Label();
             this.lbTenNV = new System.Windows.Forms.Label();
             this.lbNgayTao = new System.Windows.Forms.Label();
@@ -40,12 +39,8 @@
             this.btnSua = new System.Windows.Forms.Button();
             this.btnXoa = new System.Windows.Forms.Button();
             this.btnTK = new System.Windows.Forms.Button();
-            this.errorProviderMaHD = new System.Windows.Forms.ErrorProvider(this.components);
-            this.errorProviderMaNV = new System.Windows.Forms.ErrorProvider(this.components);
             this.btnXemCT = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewHDB)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProviderMaHD)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProviderMaNV)).BeginInit();
             this.SuspendLayout();
             // 
             // lbMaHD
@@ -81,7 +76,6 @@
             this.tbMaHD.Name = "tbMaHD";
             this.tbMaHD.Size = new System.Drawing.Size(100, 22);
             this.tbMaHD.TabIndex = 3;
-            this.tbMaHD.Validating += new System.ComponentModel.CancelEventHandler(this.tbMaHD_Validating);
             // 
             // dateTimePickerNgayTao
             // 
@@ -108,7 +102,6 @@
             this.cbTenNV.Name = "cbTenNV";
             this.cbTenNV.Size = new System.Drawing.Size(121, 24);
             this.cbTenNV.TabIndex = 7;
-            this.cbTenNV.Validating += new System.ComponentModel.CancelEventHandler(this.cbMaNV_Validating);
             // 
             // btnThem
             // 
@@ -150,14 +143,6 @@
             this.btnTK.UseVisualStyleBackColor = true;
             this.btnTK.Click += new System.EventHandler(this.btnTK_Click);
             // 
-            // errorProviderMaHD
-            // 
-            this.errorProviderMaHD.ContainerControl = this;
-            // 
-            // errorProviderMaNV
-            // 
-            this.errorProviderMaNV.ContainerControl = this;
-            // 
             // btnXemCT
             // 
             this.btnXemCT.Location = new System.Drawing.Point(758, 455);
@@ -189,8 +174,6 @@
             this.Text = "HoaDonBan";
             this.Load += new System.EventHandler(this.HoaDonBan_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewHDB)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProviderMaHD)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProviderMaNV)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -209,8 +192,6 @@
         private System.Windows.Forms.Button btnSua;
         private System.Windows.Forms.Button btnXoa;
         private System.Windows.Forms.Button btnTK;
-        private System.Windows.Forms.ErrorProvider errorProviderMaHD;
-        private System.Windows.Forms.ErrorProvider errorProviderMaNV;
         private System.Windows.Forms.Button btnXemCT;
     }
 }

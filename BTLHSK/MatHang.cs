@@ -13,7 +13,6 @@ namespace BTLHSK
 {
     public partial class MatHang : Form
     {
-        string str = "Data Source=KHACNGOC;Initial Catalog=ThietBiMayTinh;Integrated Security=True";
         public MatHang()
         {
             InitializeComponent();
@@ -28,11 +27,8 @@ namespace BTLHSK
         
         private void HienMH(object sender, EventArgs e)
         {
-            SqlConnection cnn = new SqlConnection(str);
-            cnn.Open();
-            SqlDataAdapter da = new SqlDataAdapter("select * from v_MatHang", cnn);
-            DataTable dt = new DataTable();
-            da.Fill(dt);
+            sql sql = new sql();
+            DataTable dt = sql.getDB("select * from v_MatHang");
             dataGridViewMH.DataSource = dt;
             dataGridViewMH.AutoResizeColumns();
             dataGridViewMH.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
@@ -43,16 +39,12 @@ namespace BTLHSK
         {
             try
             {
-                SqlConnection cnn = new SqlConnection(str);
-                cnn.Open();
+                sql sql = new sql();
                 string them = "insert into tblMatHang(iMaMH, sTenLH, sMauSac) values(@MaMH, @TenLH, @MauSac)";
-                SqlCommand cmd = new SqlCommand(them, cnn);
+                SqlCommand cmd = sql.EDIT(them);
                 cmd.Parameters.AddWithValue("@MaMH", tbMaMH.Text);
-              
                 cmd.Parameters.AddWithValue("@TenLH", tbTenLH.Text);
                 cmd.Parameters.AddWithValue("@MauSac", tbMS.Text);
-               
-               
                 if(cmd.ExecuteNonQuery() > 0) HienMH(sender, e);
 
             }catch(Exception ex)
@@ -65,10 +57,9 @@ namespace BTLHSK
         {
             try
             {
-                SqlConnection cnn = new SqlConnection(str);
-                cnn.Open();
-                string sql = "update tblMatHang set sTenLH = @TenLH where iMaMH = @MaMH";
-                SqlCommand cmd = new SqlCommand(sql, cnn);
+                sql sql = new sql();
+                string sua = "update tblMatHang set sTenLH = @TenLH where iMaMH = @MaMH";
+                SqlCommand cmd = sql.EDIT(sua);
                 cmd.Parameters.AddWithValue("@MaMH", tbMaMH.Text);
                 cmd.Parameters.AddWithValue("@TenLH", tbTenLH.Text);
                 if (cmd.ExecuteNonQuery() > 0) HienMH(sender, e);
@@ -85,9 +76,8 @@ namespace BTLHSK
         {
             try
             {
-                SqlConnection cnn = new SqlConnection(str);
-                cnn.Open();
-                SqlCommand cmd = new SqlCommand("delete tblMatHang where iMaMH = @MaMH", cnn);
+                sql sql = new sql();
+                SqlCommand cmd = sql.EDIT("delete tblMatHang where iMaMH = @MaMH");
                 cmd.Parameters.AddWithValue("@MaMH", tbMaMH.Text);
                 if (cmd.ExecuteNonQuery() > 0) HienMH(sender, e);
 
@@ -104,13 +94,10 @@ namespace BTLHSK
         {
             try
             {
-                SqlConnection cnn = new SqlConnection(str);
-                cnn.Open();
-                SqlDataAdapter da = new SqlDataAdapter("select * from v_MatHang", cnn);
-                DataTable dataTable = new DataTable();
-                da.Fill(dataTable);
-                dataGridViewMH.DataSource = dataTable;
-                DataView dv = new DataView(dataTable);
+                sql sql = new sql();
+                DataTable dt = sql.getDB("select * from v_MatHang");
+                dataGridViewMH.DataSource = dt;
+                DataView dv = new DataView(dt);
                 dv.RowFilter = string.Format("[Tên loại hàng] like '%{0}%'", tbTenLH.Text);
                 dataGridViewMH.DataSource = dv;
 
@@ -126,40 +113,6 @@ namespace BTLHSK
         {
             MatHang_Load(sender, e);
         }
-
-        private void tbMaMH_Validating(object sender, CancelEventArgs e)
-        {
-            if (string.IsNullOrEmpty(tbMaMH.Text))
-            {
-                errorProviderMaMH.SetError(tbMaMH, "Không được bỏ trống");
-            }
-            else errorProviderMaMH.SetError(tbMaMH, "");
-
-
-
-        }
-
-        private void tbTenLH_Validating(object sender, CancelEventArgs e)
-        {
-            if (string.IsNullOrEmpty(tbTenLH.Text))
-            {
-                errorProviderMaMH.SetError(tbTenLH, "Không được bỏ trống");
-            }
-            else errorProviderMaMH.SetError(tbTenLH, "");
-        }
-
-        private void tbMS_Validating(object sender, CancelEventArgs e)
-        {
-            if (string.IsNullOrEmpty(tbMS.Text))
-            {
-                errorProviderMaMH.SetError(tbMS, "Không được bỏ trống");
-            }
-            else errorProviderMaMH.SetError(tbMS, "");
-        }
-
-        
-
-        
 
         private void dataGridViewMH_CellClick(object sender, DataGridViewCellEventArgs e)
         {

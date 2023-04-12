@@ -14,7 +14,6 @@ namespace BTLHSK
 {
     public partial class NhanVien : Form
     {
-        string str = "Data Source=KHACNGOC;Initial Catalog=ThietBiMayTinh;Integrated Security=True";
         public NhanVien()
         {
             InitializeComponent();
@@ -26,21 +25,12 @@ namespace BTLHSK
         }
         private void HienNV(object sender, EventArgs e)
         {
-            using (SqlConnection cnn = new SqlConnection(str))
-            {
-                cnn.Open();
-                using (SqlDataAdapter da = new SqlDataAdapter("select * from v_NV", cnn))
-                {
-                    DataTable tb = new DataTable();
-                    da.Fill(tb);
-                    dataGridViewNV.DataSource = tb;
-                    dataGridViewNV.AutoResizeColumns();
-                    dataGridViewNV.AutoSizeColumnsMode = (DataGridViewAutoSizeColumnsMode)DataGridViewAutoSizeColumnMode.Fill;
-
-
-                }
-
-            }
+            sql sql = new sql();
+            DataTable dt = sql.getDB("select * from v_NV");
+            dataGridViewNV.DataSource = dt;
+            dataGridViewNV.AutoResizeColumns();
+            dataGridViewNV.AutoSizeColumnsMode = (DataGridViewAutoSizeColumnsMode)DataGridViewAutoSizeColumnMode.Fill;
+          
         }
 
         private void dataGridViewNV_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -51,24 +41,21 @@ namespace BTLHSK
 
         private void btnThem_Click(object sender, EventArgs e)
         {
+            
             try
             {
-                SqlConnection cnn = new SqlConnection(str);
-                cnn.Open();
-                SqlCommand cmd = cnn.CreateCommand();
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "ThemNV";
+                sql sql = new sql();
+                SqlCommand cmd = sql.EDIT("INSERT INTO tblNhanVien(iMaNV, sTen, sSDT) VALUES(@MaNV, @Ten, @SDT)");
                 cmd.Parameters.AddWithValue("@MaNV", tbMaNV.Text);
                 cmd.Parameters.AddWithValue("@Ten", tbTen.Text);
                 cmd.Parameters.AddWithValue("@SDT", tbSDT.Text);
                 if (cmd.ExecuteNonQuery() > 0) HienNV(sender, e);
-
             }
-            catch(Exception ex)
+            catch
             {
                 MessageBox.Show("Đã có lỗi xảy ra, vui lòng xem lại", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
             }
-            
 
         }
 
@@ -76,11 +63,8 @@ namespace BTLHSK
         {
             try
             {
-                SqlConnection cnn = new SqlConnection(str);
-                cnn.Open();
-                SqlCommand cmd = cnn.CreateCommand();
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "SuaTenNV";
+                sql sql = new sql();
+                SqlCommand cmd = sql.EDIT("UPDATE dbo.tblNhanVien SET sTen = @Ten WHERE iMaNV = @MaNV");
                 cmd.Parameters.AddWithValue("@MaNV", tbMaNV.Text);
                 cmd.Parameters.AddWithValue("@Ten", tbTen.Text);
                 
@@ -98,13 +82,9 @@ namespace BTLHSK
         {
             try
             {
-                SqlConnection cnn = new SqlConnection(str);
-                cnn.Open();
-                SqlCommand cmd = cnn.CreateCommand();
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "XoaNV";
+                sql sql = new sql();
+                SqlCommand cmd = sql.EDIT("DELETE dbo.tblNhanVien WHERE iMaNV = @MaNV");
                 cmd.Parameters.AddWithValue("@MaNV", tbMaNV.Text);
-               
                 if (cmd.ExecuteNonQuery() > 0) HienNV(sender, e);
 
             }
@@ -118,13 +98,10 @@ namespace BTLHSK
         {
             try
             {
-                SqlConnection cnn = new SqlConnection(str);
-                cnn.Open();
-                SqlDataAdapter da = new SqlDataAdapter("select * from v_NV", cnn);
-                DataTable dataTable = new DataTable();
-                da.Fill(dataTable);
-                dataGridViewNV.DataSource = dataTable;
-                DataView dv = new DataView(dataTable);
+                sql sql = new sql();
+                DataTable dt = sql.getDB("select * from v_NV");
+                dataGridViewNV.DataSource = dt;
+                DataView dv = new DataView(dt);
                 dv.RowFilter = string.Format("[Tên] LIKE '%{0}%'", tbTen.Text);
                 dataGridViewNV.DataSource = dv;
 
@@ -136,42 +113,16 @@ namespace BTLHSK
             }
         }
 
-        private void tbMaNV_Validating(object sender, CancelEventArgs e)
-        {
-            int MaNV;
-            bool result = int.TryParse(tbMaNV.Text, out MaNV);
-            if (result && !string.IsNullOrEmpty(tbMaNV.Text))
-            {
-                errorProviderMaNV.SetError(tbMaNV, "");
-            }
-            else
-            {
-                errorProviderMaNV.SetError(tbMaNV, "Mã nhân viên là số và không được bỏ trống");
-            }
-        }
+       
 
-        private void tbTen_Validating(object sender, CancelEventArgs e)
-        {
-            if (string.IsNullOrEmpty(tbTen.Text))
-            {
-                errorProviderTen.SetError(tbTen, "Không bỏ trống");
-            }
-            else errorProviderTen.SetError(tbTen, "");
-        }
-
-        private void tbSDT_Validating(object sender, CancelEventArgs e)
-        {
-            if (string.IsNullOrEmpty(tbSDT.Text))
-            {
-                errorProviderTen.SetError(tbSDT, "Không bỏ trống");
-            }
-            else errorProviderTen.SetError(tbSDT, "");
-
-        }
+       
 
         private void btnCapNhat_Click(object sender, EventArgs e)
         {
-            NhanVien_Load(sender, e);
+            test test = new test();
+            test.Show();
         }
+
+   
     }
 }

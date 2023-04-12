@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.lbMaHD = new System.Windows.Forms.Label();
             this.lbTenNV = new System.Windows.Forms.Label();
             this.lbNCC = new System.Windows.Forms.Label();
@@ -43,13 +42,7 @@
             this.btnXoa = new System.Windows.Forms.Button();
             this.btnTK = new System.Windows.Forms.Button();
             this.btnXemCT = new System.Windows.Forms.Button();
-            this.errorProviderMaHD = new System.Windows.Forms.ErrorProvider(this.components);
-            this.errorProviderMaNV = new System.Windows.Forms.ErrorProvider(this.components);
-            this.errorProviderNCC = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewHDN)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProviderMaHD)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProviderMaNV)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProviderNCC)).BeginInit();
             this.SuspendLayout();
             // 
             // lbMaHD
@@ -178,18 +171,6 @@
             this.btnXemCT.UseVisualStyleBackColor = true;
             this.btnXemCT.Click += new System.EventHandler(this.btnXemCT_Click_1);
             // 
-            // errorProviderMaHD
-            // 
-            this.errorProviderMaHD.ContainerControl = this;
-            // 
-            // errorProviderMaNV
-            // 
-            this.errorProviderMaNV.ContainerControl = this;
-            // 
-            // errorProviderNCC
-            // 
-            this.errorProviderNCC.ContainerControl = this;
-            // 
             // HoaDonNhap
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -213,9 +194,6 @@
             this.Text = "HoaDonNhap";
             this.Load += new System.EventHandler(this.HoaDonNhap_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewHDN)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProviderMaHD)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProviderMaNV)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProviderNCC)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -236,9 +214,6 @@
         private System.Windows.Forms.Button btnXoa;
         private System.Windows.Forms.Button btnTK;
         private System.Windows.Forms.Button btnXemCT;
-        private System.Windows.Forms.ErrorProvider errorProviderMaHD;
-        private System.Windows.Forms.ErrorProvider errorProviderMaNV;
-        private System.Windows.Forms.ErrorProvider errorProviderNCC;
         private System.Windows.Forms.Label lbTenNV;
         private System.Windows.Forms.ComboBox cbTenNV;
     }

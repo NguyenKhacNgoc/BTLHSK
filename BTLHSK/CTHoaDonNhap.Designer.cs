@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.lbMaHD = new System.Windows.Forms.Label();
             this.lbMaMH = new System.Windows.Forms.Label();
             this.lbSL = new System.Windows.Forms.Label();
@@ -39,15 +38,11 @@
             this.tbDG = new System.Windows.Forms.TextBox();
             this.dataGridViewCTHDN = new System.Windows.Forms.DataGridView();
             this.btnThem = new System.Windows.Forms.Button();
-            this.btnSua = new System.Windows.Forms.Button();
             this.btnXoa = new System.Windows.Forms.Button();
             this.btnTK = new System.Windows.Forms.Button();
-            this.errorProviderSL = new System.Windows.Forms.ErrorProvider(this.components);
-            this.errorProviderDG = new System.Windows.Forms.ErrorProvider(this.components);
             this.button2 = new System.Windows.Forms.Button();
+            this.btnXem = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCTHDN)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProviderSL)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProviderDG)).BeginInit();
             this.SuspendLayout();
             // 
             // lbMaHD
@@ -137,16 +132,6 @@
             this.btnThem.UseVisualStyleBackColor = true;
             this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
             // 
-            // btnSua
-            // 
-            this.btnSua.Location = new System.Drawing.Point(130, 284);
-            this.btnSua.Name = "btnSua";
-            this.btnSua.Size = new System.Drawing.Size(81, 61);
-            this.btnSua.TabIndex = 11;
-            this.btnSua.Text = "Sửa";
-            this.btnSua.UseVisualStyleBackColor = true;
-            this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
-            // 
             // btnXoa
             // 
             this.btnXoa.Location = new System.Drawing.Point(244, 284);
@@ -167,14 +152,6 @@
             this.btnTK.UseVisualStyleBackColor = true;
             this.btnTK.Click += new System.EventHandler(this.btnTK_Click);
             // 
-            // errorProviderSL
-            // 
-            this.errorProviderSL.ContainerControl = this;
-            // 
-            // errorProviderDG
-            // 
-            this.errorProviderDG.ContainerControl = this;
-            // 
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(28, 0);
@@ -184,15 +161,25 @@
             this.button2.Text = "button2";
             this.button2.UseVisualStyleBackColor = true;
             // 
+            // btnXem
+            // 
+            this.btnXem.Location = new System.Drawing.Point(244, 391);
+            this.btnXem.Name = "btnXem";
+            this.btnXem.Size = new System.Drawing.Size(95, 64);
+            this.btnXem.TabIndex = 16;
+            this.btnXem.Text = "Xem tất cả";
+            this.btnXem.UseVisualStyleBackColor = true;
+            this.btnXem.Click += new System.EventHandler(this.btnXem_Click);
+            // 
             // CTHoaDonNhap
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1099, 553);
+            this.Controls.Add(this.btnXem);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.btnTK);
             this.Controls.Add(this.btnXoa);
-            this.Controls.Add(this.btnSua);
             this.Controls.Add(this.btnThem);
             this.Controls.Add(this.dataGridViewCTHDN);
             this.Controls.Add(this.tbDG);
@@ -207,8 +194,6 @@
             this.Text = "CTHoaDonNhap";
             this.Load += new System.EventHandler(this.CTHoaDonNhap_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCTHDN)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProviderSL)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProviderDG)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -226,11 +211,9 @@
         private System.Windows.Forms.TextBox tbDG;
         private System.Windows.Forms.DataGridView dataGridViewCTHDN;
         private System.Windows.Forms.Button btnThem;
-        private System.Windows.Forms.Button btnSua;
         private System.Windows.Forms.Button btnXoa;
         private System.Windows.Forms.Button btnTK;
-        private System.Windows.Forms.ErrorProvider errorProviderSL;
-        private System.Windows.Forms.ErrorProvider errorProviderDG;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnXem;
     }
 }

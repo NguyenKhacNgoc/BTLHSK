@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.lbMaNV = new System.Windows.Forms.Label();
             this.lbTen = new System.Windows.Forms.Label();
             this.lbSDT = new System.Windows.Forms.Label();
@@ -40,14 +39,8 @@
             this.btnSua = new System.Windows.Forms.Button();
             this.btnXoa = new System.Windows.Forms.Button();
             this.btnTK = new System.Windows.Forms.Button();
-            this.errorProviderMaNV = new System.Windows.Forms.ErrorProvider(this.components);
-            this.errorProviderTen = new System.Windows.Forms.ErrorProvider(this.components);
-            this.errorProviderSDT = new System.Windows.Forms.ErrorProvider(this.components);
             this.btnCapNhat = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewNV)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProviderMaNV)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProviderTen)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProviderSDT)).BeginInit();
             this.SuspendLayout();
             // 
             // lbMaNV
@@ -83,7 +76,6 @@
             this.tbMaNV.Name = "tbMaNV";
             this.tbMaNV.Size = new System.Drawing.Size(100, 22);
             this.tbMaNV.TabIndex = 3;
-            this.tbMaNV.Validating += new System.ComponentModel.CancelEventHandler(this.tbMaNV_Validating);
             // 
             // tbTen
             // 
@@ -91,7 +83,6 @@
             this.tbTen.Name = "tbTen";
             this.tbTen.Size = new System.Drawing.Size(100, 22);
             this.tbTen.TabIndex = 4;
-            this.tbTen.Validating += new System.ComponentModel.CancelEventHandler(this.tbTen_Validating);
             // 
             // tbSDT
             // 
@@ -99,7 +90,6 @@
             this.tbSDT.Name = "tbSDT";
             this.tbSDT.Size = new System.Drawing.Size(100, 22);
             this.tbSDT.TabIndex = 5;
-            this.tbSDT.Validating += new System.ComponentModel.CancelEventHandler(this.tbSDT_Validating);
             // 
             // dataGridViewNV
             // 
@@ -152,18 +142,6 @@
             this.btnTK.UseVisualStyleBackColor = true;
             this.btnTK.Click += new System.EventHandler(this.btnTK_Click);
             // 
-            // errorProviderMaNV
-            // 
-            this.errorProviderMaNV.ContainerControl = this;
-            // 
-            // errorProviderTen
-            // 
-            this.errorProviderTen.ContainerControl = this;
-            // 
-            // errorProviderSDT
-            // 
-            this.errorProviderSDT.ContainerControl = this;
-            // 
             // btnCapNhat
             // 
             this.btnCapNhat.Location = new System.Drawing.Point(832, 412);
@@ -195,9 +173,6 @@
             this.Text = "Quản Lý Nhân Viên";
             this.Load += new System.EventHandler(this.NhanVien_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewNV)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProviderMaNV)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProviderTen)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProviderSDT)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -216,9 +191,6 @@
         private System.Windows.Forms.Button btnSua;
         private System.Windows.Forms.Button btnXoa;
         private System.Windows.Forms.Button btnTK;
-        private System.Windows.Forms.ErrorProvider errorProviderMaNV;
-        private System.Windows.Forms.ErrorProvider errorProviderTen;
-        private System.Windows.Forms.ErrorProvider errorProviderSDT;
         private System.Windows.Forms.Button btnCapNhat;
     }
 }

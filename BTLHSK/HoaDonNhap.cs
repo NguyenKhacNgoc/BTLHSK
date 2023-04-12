@@ -11,12 +11,9 @@ using System.Windows.Forms;
 
 namespace BTLHSK
 {
+    
     public partial class HoaDonNhap : Form
     {
-        
-        string str = "Data Source=KHACNGOC;Initial Catalog=ThietBiMayTinh;Integrated Security=True";
-        
-
         public HoaDonNhap()
         {
             
@@ -31,25 +28,16 @@ namespace BTLHSK
         }
         private void CB(object sender, EventArgs e)
         {
-            SqlConnection cnn = new SqlConnection(str);
-            cnn.Open();
-            SqlCommand cmd = new SqlCommand("select sTen from tblNhanVien", cnn);
-            SqlDataReader dataReader= cmd.ExecuteReader();
-            while(dataReader.Read())
-            {
-                cbTenNV.Items.Add(dataReader["sTen"].ToString());
-            }
+            sql sql = new sql();
+            sql.combobox("select sTen from tblNhanVien", "sTen", cbTenNV);
 
         }
         
         private void HienHDN(object sender, EventArgs e)
         {
-            SqlConnection cnn = new SqlConnection(str);
-            cnn.Open();
-            SqlDataAdapter da = new SqlDataAdapter("select * from v_HoaDonNhap", cnn);
-            DataTable dataTable = new DataTable();
-            da.Fill(dataTable);
-            dataGridViewHDN.DataSource = dataTable;
+            sql sql = new sql();
+            DataTable dt = sql.getDB("select * from v_HoaDonNhap");
+            dataGridViewHDN.DataSource = dt;
             dataGridViewHDN.AutoResizeColumns();
             dataGridViewHDN.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
@@ -58,17 +46,10 @@ namespace BTLHSK
 
         private void btnThem_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(tbMaHD.Text)) errorProviderMaHD.SetError(tbMaHD, "Không bỏ trống");
-            else errorProviderMaHD.SetError(tbMaHD, "");
-            if (string.IsNullOrEmpty(cbTenNV.Text)) errorProviderMaNV.SetError(cbMaNV, "Không bỏ trống");
-            else errorProviderMaNV.SetError(cbTenNV, "");
-            if (string.IsNullOrEmpty(tbNCC.Text)) errorProviderNCC.SetError(tbNCC, "Không bỏ trống");
-            else errorProviderNCC.SetError(tbNCC, "");
             try
             {
-                SqlConnection cnn = new SqlConnection(str);
-                cnn.Open();
-                SqlCommand cmd = new SqlCommand("insert into tblHoaDonNhap (iMaHD, sTenNV, sNCC, dNgayTao) values (@MaHD, @TenNV, @NCC, @NgayTao)", cnn);
+                sql sql = new sql();
+                SqlCommand cmd = sql.EDIT("insert into tblHoaDonNhap (iMaHD, sTenNV, sNCC, dNgayTao) values (@MaHD, @TenNV, @NCC, @NgayTao)");
                 cmd.Parameters.AddWithValue("@MaHD", tbMaHD.Text);
                 cmd.Parameters.AddWithValue("@TenNV", cbTenNV.Text);
                 cmd.Parameters.AddWithValue("@NCC", tbNCC.Text);
@@ -84,9 +65,9 @@ namespace BTLHSK
         {
             try
             {
-                SqlConnection cnn = new SqlConnection(str);
-                cnn.Open();
-                SqlCommand cmd = new SqlCommand("update tblHoaDonNhap set sNCC = @NCC where iMaHD = @MaHD and sTenNV = @TenNV", cnn);
+                sql sql = new sql();
+                sql.ketnoi();
+                SqlCommand cmd = sql.EDIT("update tblHoaDonNhap set sNCC = @NCC where iMaHD = @MaHD and sTenNV = @TenNV");
                 cmd.Parameters.AddWithValue("@MaHD", tbMaHD.Text);
                 cmd.Parameters.AddWithValue("@TenNV", cbTenNV.Text);
                 cmd.Parameters.AddWithValue("@NCC", tbNCC.Text);
@@ -102,9 +83,8 @@ namespace BTLHSK
         {
             try
             {
-                SqlConnection cnn = new SqlConnection(str);
-                cnn.Open();
-                SqlCommand cmd = new SqlCommand("delete tblHoaDonNhap where iMaHD = @MaHD AND sTenNV = @TenNV", cnn);
+                sql sql = new sql();
+                SqlCommand cmd = sql.EDIT("delete tblHoaDonNhap where iMaHD = @MaHD AND sTenNV = @TenNV");
                 cmd.Parameters.AddWithValue("@MaHD", tbMaHD.Text);
                 cmd.Parameters.AddWithValue("@TenNV", cbTenNV.Text);
                 if(cmd.ExecuteNonQuery() > 0) HienHDN(sender,e);
@@ -126,13 +106,11 @@ namespace BTLHSK
         {
             try
             {
-                SqlConnection cnn = new SqlConnection(str);
-                cnn.Open();
-                SqlDataAdapter da = new SqlDataAdapter("select * from v_HoaDonNhap", cnn);
-                DataTable dataTable = new DataTable();
-                da.Fill(dataTable);
-                dataGridViewHDN.DataSource= dataTable;
-                DataView dv = new DataView(dataTable);
+                
+                sql sql = new sql();
+                DataTable dt = sql.getDB("select * from v_HoaDonNhap");
+                dataGridViewHDN.DataSource = dt;
+                DataView dv = new DataView(dt);
                 dv.RowFilter = string.Format("[Nhà cung cấp] like '%{0}%'", tbNCC.Text);
                 dataGridViewHDN.DataSource = dv;
 
@@ -148,11 +126,13 @@ namespace BTLHSK
 
         private void btnXemCT_Click_1(object sender, EventArgs e)
         {
-            
-            
+            int MaHD = (int)dataGridViewHDN.SelectedRows[0].Cells["Mã hoá đơn"].Value;
+            CTHoaDonNhap xemct = new CTHoaDonNhap(MaHD);
+            xemct.XemCTHD(MaHD);
+            xemct.ShowDialog();
             
 
         }
-        
+
     }
 }

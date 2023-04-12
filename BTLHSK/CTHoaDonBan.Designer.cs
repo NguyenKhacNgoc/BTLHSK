@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.lbMaHD = new System.Windows.Forms.Label();
             this.lbMaMH = new System.Windows.Forms.Label();
             this.lbSL = new System.Windows.Forms.Label();
@@ -41,19 +40,13 @@
             this.cbMaMH = new System.Windows.Forms.ComboBox();
             this.dataGridViewCTHDB = new System.Windows.Forms.DataGridView();
             this.btnThem = new System.Windows.Forms.Button();
-            this.btnSua = new System.Windows.Forms.Button();
             this.btnXoa = new System.Windows.Forms.Button();
             this.btnTK = new System.Windows.Forms.Button();
-            this.errorProviderSL = new System.Windows.Forms.ErrorProvider(this.components);
-            this.errorProviderTGBH = new System.Windows.Forms.ErrorProvider(this.components);
             this.btnXem = new System.Windows.Forms.Button();
             this.lbGB = new System.Windows.Forms.Label();
             this.tbGB = new System.Windows.Forms.TextBox();
-            this.errorProviderGB = new System.Windows.Forms.ErrorProvider(this.components);
+            this.btnIn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCTHDB)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProviderSL)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProviderTGBH)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProviderGB)).BeginInit();
             this.SuspendLayout();
             // 
             // lbMaHD
@@ -107,7 +100,6 @@
             this.tbSL.Name = "tbSL";
             this.tbSL.Size = new System.Drawing.Size(100, 22);
             this.tbSL.TabIndex = 7;
-            this.tbSL.Validating += new System.ComponentModel.CancelEventHandler(this.tbSL_Validating);
             // 
             // tbTGBH
             // 
@@ -115,7 +107,6 @@
             this.tbTGBH.Name = "tbTGBH";
             this.tbTGBH.Size = new System.Drawing.Size(100, 22);
             this.tbTGBH.TabIndex = 8;
-            this.tbTGBH.Validating += new System.ComponentModel.CancelEventHandler(this.tbTGBH_Validating);
             // 
             // tbGC
             // 
@@ -161,16 +152,6 @@
             this.btnThem.UseVisualStyleBackColor = true;
             this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
             // 
-            // btnSua
-            // 
-            this.btnSua.Location = new System.Drawing.Point(134, 271);
-            this.btnSua.Name = "btnSua";
-            this.btnSua.Size = new System.Drawing.Size(97, 58);
-            this.btnSua.TabIndex = 14;
-            this.btnSua.Text = "Sửa";
-            this.btnSua.UseVisualStyleBackColor = true;
-            this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
-            // 
             // btnXoa
             // 
             this.btnXoa.Location = new System.Drawing.Point(28, 358);
@@ -183,7 +164,7 @@
             // 
             // btnTK
             // 
-            this.btnTK.Location = new System.Drawing.Point(134, 358);
+            this.btnTK.Location = new System.Drawing.Point(166, 276);
             this.btnTK.Name = "btnTK";
             this.btnTK.Size = new System.Drawing.Size(96, 53);
             this.btnTK.TabIndex = 16;
@@ -191,21 +172,13 @@
             this.btnTK.UseVisualStyleBackColor = true;
             this.btnTK.Click += new System.EventHandler(this.btnTK_Click);
             // 
-            // errorProviderSL
-            // 
-            this.errorProviderSL.ContainerControl = this;
-            // 
-            // errorProviderTGBH
-            // 
-            this.errorProviderTGBH.ContainerControl = this;
-            // 
             // btnXem
             // 
-            this.btnXem.Location = new System.Drawing.Point(76, 417);
+            this.btnXem.Location = new System.Drawing.Point(166, 358);
             this.btnXem.Name = "btnXem";
             this.btnXem.Size = new System.Drawing.Size(98, 49);
             this.btnXem.TabIndex = 17;
-            this.btnXem.Text = "Xem";
+            this.btnXem.Text = "Xem tất cả";
             this.btnXem.UseVisualStyleBackColor = true;
             this.btnXem.Click += new System.EventHandler(this.btnXem_Click);
             // 
@@ -224,23 +197,28 @@
             this.tbGB.Name = "tbGB";
             this.tbGB.Size = new System.Drawing.Size(100, 22);
             this.tbGB.TabIndex = 19;
-            this.tbGB.Validating += new System.ComponentModel.CancelEventHandler(this.tbGB_Validating);
             // 
-            // errorProviderGB
+            // btnIn
             // 
-            this.errorProviderGB.ContainerControl = this;
+            this.btnIn.Location = new System.Drawing.Point(87, 434);
+            this.btnIn.Name = "btnIn";
+            this.btnIn.Size = new System.Drawing.Size(108, 41);
+            this.btnIn.TabIndex = 20;
+            this.btnIn.Text = "In";
+            this.btnIn.UseVisualStyleBackColor = true;
+            this.btnIn.Click += new System.EventHandler(this.btnIn_Click);
             // 
             // CTHoaDonBan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1121, 487);
+            this.Controls.Add(this.btnIn);
             this.Controls.Add(this.tbGB);
             this.Controls.Add(this.lbGB);
             this.Controls.Add(this.btnXem);
             this.Controls.Add(this.btnTK);
             this.Controls.Add(this.btnXoa);
-            this.Controls.Add(this.btnSua);
             this.Controls.Add(this.btnThem);
             this.Controls.Add(this.dataGridViewCTHDB);
             this.Controls.Add(this.cbMaMH);
@@ -257,9 +235,6 @@
             this.Text = "CTHoaDonBan";
             this.Load += new System.EventHandler(this.CTHoaDonBan_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCTHDB)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProviderSL)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProviderTGBH)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProviderGB)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -279,14 +254,11 @@
         private System.Windows.Forms.ComboBox cbMaMH;
         private System.Windows.Forms.DataGridView dataGridViewCTHDB;
         private System.Windows.Forms.Button btnThem;
-        private System.Windows.Forms.Button btnSua;
         private System.Windows.Forms.Button btnXoa;
         private System.Windows.Forms.Button btnTK;
-        private System.Windows.Forms.ErrorProvider errorProviderSL;
-        private System.Windows.Forms.ErrorProvider errorProviderTGBH;
         private System.Windows.Forms.Button btnXem;
         private System.Windows.Forms.Label lbGB;
         private System.Windows.Forms.TextBox tbGB;
-        private System.Windows.Forms.ErrorProvider errorProviderGB;
+        private System.Windows.Forms.Button btnIn;
     }
 }

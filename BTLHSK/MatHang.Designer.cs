@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.lbMaMH = new System.Windows.Forms.Label();
             this.lbTMH = new System.Windows.Forms.Label();
             this.lbMS = new System.Windows.Forms.Label();
@@ -41,13 +40,7 @@
             this.btnXoa = new System.Windows.Forms.Button();
             this.btnTK = new System.Windows.Forms.Button();
             this.btnCN = new System.Windows.Forms.Button();
-            this.errorProviderMaMH = new System.Windows.Forms.ErrorProvider(this.components);
-            this.errorProviderTenLH = new System.Windows.Forms.ErrorProvider(this.components);
-            this.errorProviderMS = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMH)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProviderMaMH)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProviderTenLH)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProviderMS)).BeginInit();
             this.SuspendLayout();
             // 
             // lbMaMH
@@ -83,7 +76,6 @@
             this.tbMaMH.Name = "tbMaMH";
             this.tbMaMH.Size = new System.Drawing.Size(100, 22);
             this.tbMaMH.TabIndex = 6;
-            this.tbMaMH.Validating += new System.ComponentModel.CancelEventHandler(this.tbMaMH_Validating);
             // 
             // tbTenLH
             // 
@@ -91,7 +83,6 @@
             this.tbTenLH.Name = "tbTenLH";
             this.tbTenLH.Size = new System.Drawing.Size(100, 22);
             this.tbTenLH.TabIndex = 7;
-            this.tbTenLH.Validating += new System.ComponentModel.CancelEventHandler(this.tbTenLH_Validating);
             // 
             // tbMS
             // 
@@ -99,7 +90,6 @@
             this.tbMS.Name = "tbMS";
             this.tbMS.Size = new System.Drawing.Size(100, 22);
             this.tbMS.TabIndex = 8;
-            this.tbMS.Validating += new System.ComponentModel.CancelEventHandler(this.tbMS_Validating);
             // 
             // dataGridViewMH
             // 
@@ -162,18 +152,6 @@
             this.btnCN.UseVisualStyleBackColor = true;
             this.btnCN.Click += new System.EventHandler(this.btnCN_Click);
             // 
-            // errorProviderMaMH
-            // 
-            this.errorProviderMaMH.ContainerControl = this;
-            // 
-            // errorProviderTenLH
-            // 
-            this.errorProviderTenLH.ContainerControl = this;
-            // 
-            // errorProviderMS
-            // 
-            this.errorProviderMS.ContainerControl = this;
-            // 
             // MatHang
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -195,9 +173,6 @@
             this.Text = "MatHang";
             this.Load += new System.EventHandler(this.MatHang_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMH)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProviderMaMH)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProviderTenLH)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProviderMS)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -217,8 +192,5 @@
         private System.Windows.Forms.Button btnXoa;
         private System.Windows.Forms.Button btnTK;
         private System.Windows.Forms.Button btnCN;
-        private System.Windows.Forms.ErrorProvider errorProviderMaMH;
-        private System.Windows.Forms.ErrorProvider errorProviderTenLH;
-        private System.Windows.Forms.ErrorProvider errorProviderMS;
     }
 }

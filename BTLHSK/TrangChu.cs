@@ -47,12 +47,7 @@ namespace BTLHSK
             HoaDonBan.Show();
         }
 
-        private void mnCTHDB_Click(object sender, EventArgs e)
-        {
-            CTHoaDonBan CTHoaDonBan = new CTHoaDonBan(0);
-            CTHoaDonBan.MdiParent= this;
-            CTHoaDonBan.Show();
-        }
+       
 
         
 
@@ -70,11 +65,6 @@ namespace BTLHSK
             hoaDonNhap.Show();
         }
 
-        private void mnCTHDN_Click(object sender, EventArgs e)
-        {
-            CTHoaDonNhap cTHoaDonNhap = new CTHoaDonNhap();
-            cTHoaDonNhap.MdiParent = this;
-            cTHoaDonNhap.Show();
-        }
+   
     }
 }

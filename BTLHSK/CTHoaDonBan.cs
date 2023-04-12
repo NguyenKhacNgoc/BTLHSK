@@ -15,7 +15,7 @@ namespace BTLHSK
     {
 
         private int MaHD;
-        public string str = "Data Source=KHACNGOC;Initial Catalog=ThietBiMayTinh;Integrated Security=True";
+       
         public CTHoaDonBan(int MaHD)
         {
             InitializeComponent();
@@ -34,95 +34,40 @@ namespace BTLHSK
         }
         private void HienCBBoxMaHD()
         {
-            using(SqlConnection cnn = new SqlConnection(str))
-            {
-                cnn.Open();
-                using(SqlCommand cmd = new SqlCommand("select iMaHD from tblHoaDonBan", cnn))
-                {
-                    using(SqlDataReader rdr = cmd.ExecuteReader())
-                    {
-                        while(rdr.Read())
-                        {
-                            cbMaHD.Items.Add(rdr["iMaHD"].ToString());
-                        }
-                    }
-                    
-                    
-
-                    
-                }
-            }
+            sql sql = new sql();
+            sql.combobox("select iMaHD from tblHoaDonBan", "iMaHD", cbMaHD);
+            
         }
 
         private void HienCBBoxMaMH()
         {
-            using (SqlConnection cnn = new SqlConnection(str))
-            {
-                cnn.Open();
-                using (SqlCommand cmd = new SqlCommand("select iMaMH from tblMatHang", cnn))
-                {
-                    using (SqlDataReader rdr = cmd.ExecuteReader())
-                    {
-                        while (rdr.Read())
-                        {
-                            cbMaMH.Items.Add(rdr["iMaMH"].ToString());
-                        }
-                    }
-
-
-
-
-                }
-            }
+            sql sql = new sql();
+            sql.combobox("select iMaMH from tblMatHang", "iMaMH", cbMaMH);
         }
 
        private void HienDTGRV()
         {
-            using (SqlConnection cnn = new SqlConnection(str))
-            {
-                cnn.Open();
-                using(SqlDataAdapter da = new SqlDataAdapter("select * from v_CTHDB", cnn))
-                {
-                    DataTable dataTable = new DataTable();
-                    da.Fill(dataTable);
-                    dataGridViewCTHDB.DataSource = dataTable;
-                    dataGridViewCTHDB.AutoResizeColumns();
-                    dataGridViewCTHDB.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-                }
-                
+            sql sql = new sql();
+            DataTable dt = sql.getDB("select * from v_CTHDB");
+            dataGridViewCTHDB.DataSource = dt;
+            dataGridViewCTHDB.AutoResizeColumns();
+            dataGridViewCTHDB.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
-                
-            }
         }
-
-
-        
-
         private void btnThem_Click(object sender, EventArgs e)
         {
+
             try
             {
-                int MaHD = Convert.ToInt32(cbMaHD.Text);
-                int MaMH = Convert.ToInt32(cbMaMH.Text);
-                int SoLuong = Convert.ToInt32(tbSL.Text);
-                int TGBH = Convert.ToInt32(tbTGBH.Text);
-                using (SqlConnection cnn = new SqlConnection(str))
-                {
-                    cnn.Open();
-                    using (SqlCommand cmd = cnn.CreateCommand())
-                    {
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.CommandText = "ThemCTHDB";
-                        cmd.Parameters.AddWithValue("@MaHD", MaHD);
-                        cmd.Parameters.AddWithValue("@MaMH", MaMH);
-                        cmd.Parameters.AddWithValue("@SoLuong", SoLuong);
-                        cmd.Parameters.AddWithValue("@GiaBan", tbGB.Text);
-                        cmd.Parameters.AddWithValue("@TGBH", TGBH);
-                        cmd.Parameters.AddWithValue("@GhiChu", tbGC.Text);
-                        if (cmd.ExecuteNonQuery() > 0) HienDTGRV();
-
-                    }
-                }
+                sql sql = new sql();
+                SqlCommand cmd = sql.EDIT("INSERT INTO dbo.tblCTHoaDonBan(iMaHD,iMaMH,iSoLuong,fGiaBan,iThoiGianBaoHanh,sGhiChu) VALUES (@MaHD, @MaMH, @SoLuong, @GiaBan, @TGBH, @GhiChu)");
+                cmd.Parameters.AddWithValue("@MaHD", cbMaHD.Text);
+                cmd.Parameters.AddWithValue("@MaMH", cbMaMH.Text);
+                cmd.Parameters.AddWithValue("@SoLuong", tbSL.Text);
+                cmd.Parameters.AddWithValue("@GiaBan", tbGB.Text);
+                cmd.Parameters.AddWithValue("@TGBH", tbTGBH.Text);
+                cmd.Parameters.AddWithValue("@GhiChu", tbGC.Text);
+                if (cmd.ExecuteNonQuery() > 0) HienDTGRV();
 
             }
             
@@ -140,105 +85,20 @@ namespace BTLHSK
                 cbMaMH.Text = dataGridViewCTHDB.CurrentRow.Cells["Mã MH"].Value.ToString();
         }
 
-        private void btnSua_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                using(SqlConnection cnn = new SqlConnection(str))
-                {
-                    cnn.Open();
-                    using(SqlCommand cmd = cnn.CreateCommand())
-                    {
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.CommandText = "SuaCTHDB";
-                        cmd.Parameters.AddWithValue("@MaHD", cbMaHD.Text);
-                        cmd.Parameters.AddWithValue("@MaMH", cbMaMH.Text);
-                        cmd.Parameters.AddWithValue("@SoLuong", tbSL.Text);
-                        cmd.Parameters.AddWithValue("@GiaBan", tbGB.Text);
-                        cmd.Parameters.AddWithValue("@TGBH", tbTGBH.Text);
-                        cmd.Parameters.AddWithValue("@GhiChu", tbGC.Text);
-                        if (cmd.ExecuteNonQuery() > 0) HienDTGRV();
-                    }
-                }
-                
+        
 
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show("Đã có lỗi xảy ra, vui lòng xem lại", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void tbSL_Validating(object sender, CancelEventArgs e)
-        {
-            int SoLuong;
-            bool result_sl = int.TryParse(tbSL.Text, out SoLuong);
-            if (result_sl && Convert.ToInt32(tbSL.Text)>0)
-            {
-                // nếu giá trị nhập vào là số nguyên và >0
-                errorProviderSL.SetError(tbSL, "");
-                
-            }
-            else
-            {
-                errorProviderSL.SetError(tbSL, "Số lượng phải là số nguyên và lớn hơn 0");
-                
-            }
-            
-                
-        }
-
-        private void tbTGBH_Validating(object sender, CancelEventArgs e)
-        {
-            int tgbh;
-            bool result_tgbh = int.TryParse(tbTGBH.Text, out tgbh);
-            if (result_tgbh && Convert.ToInt32(tbTGBH.Text) > 0)
-            {
-                errorProviderTGBH.SetError(tbTGBH, "");
-
-            }
-            else
-            {
-                errorProviderTGBH.SetError(tbTGBH, "Đây là số tháng bảo hành");
-
-            }
-
-
-        }
-        private void tbGB_Validating(object sender, CancelEventArgs e)
-        {
-            int gb;
-            bool result = int.TryParse(tbTGBH.Text, out gb);
-            if (result && Convert.ToInt32(tbGB.Text) > 0)
-            {
-                errorProviderGB.SetError(tbGB, "");
-
-            }
-            else
-            {
-                errorProviderGB.SetError(tbGB, "Đây là số tháng bảo hành");
-
-            }
-
-        }
+       
 
         private void btnXoa_Click(object sender, EventArgs e)
         {
             try
             {
-                using (SqlConnection cnn = new SqlConnection(str))
-                {
-                    cnn.Open();
-                    using (SqlCommand cmd = cnn.CreateCommand())
-                    {
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.CommandText = "XoaCTHDB";
-                        cmd.Parameters.AddWithValue("@MaHD", cbMaHD.Text);
-                        cmd.Parameters.AddWithValue("@MaMH", cbMaMH.Text);
-                        if (cmd.ExecuteNonQuery() > 0) HienDTGRV();
-                    }
-                }
-            }catch(Exception ex)
+                sql sql = new sql();
+                SqlCommand cmd = sql.EDIT("DELETE dbo.tblCTHoaDonBan WHERE iMaHD = @MaHD AND iMaMH = @MaMH");
+                cmd.Parameters.AddWithValue("@MaHD", cbMaHD.Text);
+                cmd.Parameters.AddWithValue("@MaMH", cbMaMH.Text);
+                if (cmd.ExecuteNonQuery() > 0) HienDTGRV();
+            }catch
             {
                 MessageBox.Show("Đã có lỗi xảy ra, vui lòng xem lại", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -248,27 +108,14 @@ namespace BTLHSK
         {
             try
             {
-                if (string.IsNullOrEmpty(cbMaHD.Text))
-                {
-                    HienDTGRV();
-                }
-                else
-                {
-                    SqlConnection cnn = new SqlConnection(str);
-                    cnn.Open();
-                    SqlDataAdapter dataAdapter = new SqlDataAdapter("select * from v_CTHDB", cnn);
-                    DataTable dataTable = new DataTable();
-                    dataAdapter.Fill(dataTable);
-                    dataGridViewCTHDB.DataSource = dataTable;
-
-                    DataView dataView = new DataView(dataTable);
-                    dataView.RowFilter = string.Format("[Mã HD] = '{0}'", cbMaHD.Text);
-                    dataGridViewCTHDB.DataSource = dataView;
-
-                }
-                
-
-            }catch(Exception ex)
+                sql sql = new sql();
+                DataTable dt = sql.getDB("select * from v_CTHDB");
+                dataGridViewCTHDB.DataSource = dt;
+                DataView dv = new DataView(dt);
+                dv.RowFilter = string.Format("[Mã HD] = '{0}'", cbMaHD.Text);
+                dataGridViewCTHDB.DataSource = dv;
+  
+            }catch
             {
                 MessageBox.Show("Đã có lỗi xảy ra, vui lòng xem lại", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -294,19 +141,23 @@ namespace BTLHSK
         }
         public void XemCTHDB(int MaHD)
         {
-            SqlConnection cnn = new SqlConnection(str);
-            cnn.Open();
-            SqlCommand cmd = new SqlCommand("exec xemCTHDB @MaHD", cnn);
-            cmd.Parameters.AddWithValue("@MaHD", MaHD);
-            SqlDataAdapter da = new SqlDataAdapter(cmd);
-            DataTable dt = new DataTable();
-            da.Fill(dt);
+            sql sql = new sql();
+            DataTable dt = sql.getDB("select * from v_CTHDB");
             dataGridViewCTHDB.DataSource = dt;
+            DataView dv = new DataView(dt);
+            dv.RowFilter = string.Format("[Mã HD] = '{0}'", MaHD);
+            dataGridViewCTHDB.DataSource = dv;
 
         }
-        
 
-        
+        private void btnIn_Click(object sender, EventArgs e)
+        {
+            int MaHD = (int)dataGridViewCTHDB.SelectedRows[0].Cells[0].Value;
+            RP_CTHDB rp = new RP_CTHDB(MaHD);
+            rp.void_RP_CT_HDB(MaHD);
+            rp.ShowDialog();
+
+        }
     }
     
 }
