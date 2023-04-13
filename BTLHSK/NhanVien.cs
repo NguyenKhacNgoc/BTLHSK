@@ -117,11 +117,7 @@ namespace BTLHSK
 
        
 
-        private void btnCapNhat_Click(object sender, EventArgs e)
-        {
-            test test = new test();
-            test.Show();
-        }
+        
 
    
     }
