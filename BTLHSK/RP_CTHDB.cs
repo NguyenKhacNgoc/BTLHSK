@@ -40,8 +40,6 @@ namespace BTLHSK
             rp.SetDataSource(dt);
             crp_CTHDB.ReportSource = rp;
             crp_CTHDB.Refresh();
-
-
         }
         
 
