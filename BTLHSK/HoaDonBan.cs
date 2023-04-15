@@ -128,10 +128,20 @@ namespace BTLHSK
 
         private void btnXemCT_Click_1(object sender, EventArgs e)
         {
-            int MaHD = (int)dataGridViewHDB.SelectedRows[0].Cells["Mã Hoá Đơn"].Value;
-            CTHoaDonBan xem = new CTHoaDonBan(MaHD);
-            xem.XemCTHDB(MaHD);
-            xem.ShowDialog();
+            try
+            {
+                int MaHD = (int)dataGridViewHDB.SelectedRows[0].Cells["Mã Hoá Đơn"].Value;
+                CTHoaDonBan xem = new CTHoaDonBan(MaHD);
+                xem.XemCTHDB(MaHD);
+                xem.Show();
+
+            }
+            catch
+            {
+                MessageBox.Show("Hãy chọn hoá đơn để xem chi tiết", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+            
         }
 
 

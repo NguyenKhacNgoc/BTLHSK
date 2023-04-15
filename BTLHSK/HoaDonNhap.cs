@@ -126,10 +126,19 @@ namespace BTLHSK
 
         private void btnXemCT_Click_1(object sender, EventArgs e)
         {
-            int MaHD = (int)dataGridViewHDN.SelectedRows[0].Cells["Mã hoá đơn"].Value;
-            CTHoaDonNhap xemct = new CTHoaDonNhap(MaHD);
-            xemct.XemCTHD(MaHD);
-            xemct.ShowDialog();
+            try
+            {
+                int MaHD = (int)dataGridViewHDN.SelectedRows[0].Cells["Mã hoá đơn"].Value;
+                CTHoaDonNhap xemct = new CTHoaDonNhap(MaHD);
+                xemct.XemCTHD(MaHD);
+                xemct.Show();
+
+            }
+            catch
+            {
+                MessageBox.Show("Hãy chọn hoá đơn để xem chi tiết", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
             
 
         }
