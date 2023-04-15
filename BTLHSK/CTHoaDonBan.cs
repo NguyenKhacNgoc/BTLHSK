@@ -59,7 +59,6 @@ namespace BTLHSK
 
             try
             {
-                int sl = Convert.ToInt32(tbSL.Text);
                 sql sql = new sql();
                 SqlCommand cmd = sql.EDIT("INSERT INTO dbo.tblCTHoaDonBan(iMaHD,iMaMH,iSoLuong,fGiaBan,iThoiGianBaoHanh,sGhiChu) VALUES (@MaHD, @MaMH, @SoLuong, @GiaBan, @TGBH, @GhiChu)");
                 cmd.Parameters.AddWithValue("@MaHD", cbMaHD.Text);
@@ -68,7 +67,6 @@ namespace BTLHSK
                 cmd.Parameters.AddWithValue("@GiaBan", tbGB.Text);
                 cmd.Parameters.AddWithValue("@TGBH", tbTGBH.Text);
                 cmd.Parameters.AddWithValue("@GhiChu", tbGC.Text);
-                
                 if (cmd.ExecuteNonQuery() > 0) HienDTGRV();
 
             }
