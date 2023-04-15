@@ -56,9 +56,26 @@ namespace BTLHSK
         }
         private void btnThem_Click(object sender, EventArgs e)
         {
-
+ 
             try
             {
+                if (Convert.ToInt32(tbSL.Text) <= 0)
+                {
+                    errorProviderSL.SetError(tbSL, "Số lượng phải lớn hơn 0");
+                }
+                if(Convert.ToInt32(tbSL.Text) > 0)
+                {
+                    errorProviderSL.SetError(tbSL, "");
+                }
+                if(Convert.ToInt32(tbGB.Text) <= 0)
+                {
+                    errorProviderGB.SetError(tbGB, "Giá bán phải phải lớn hơn 0");
+                }
+                if(Convert.ToInt32(tbGB.Text) > 0)
+                {
+                    errorProviderGB.SetError(tbGB, "");
+                }
+                
                 sql sql = new sql();
                 SqlCommand cmd = sql.EDIT("INSERT INTO dbo.tblCTHoaDonBan(iMaHD,iMaMH,iSoLuong,fGiaBan,iThoiGianBaoHanh,sGhiChu) VALUES (@MaHD, @MaMH, @SoLuong, @GiaBan, @TGBH, @GhiChu)");
                 cmd.Parameters.AddWithValue("@MaHD", cbMaHD.Text);

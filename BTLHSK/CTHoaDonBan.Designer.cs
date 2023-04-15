@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lbMaHD = new System.Windows.Forms.Label();
             this.lbMaMH = new System.Windows.Forms.Label();
             this.lbSL = new System.Windows.Forms.Label();
@@ -46,7 +47,11 @@
             this.lbGB = new System.Windows.Forms.Label();
             this.tbGB = new System.Windows.Forms.TextBox();
             this.btnIn = new System.Windows.Forms.Button();
+            this.errorProviderSL = new System.Windows.Forms.ErrorProvider(this.components);
+            this.errorProviderGB = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCTHDB)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderSL)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderGB)).BeginInit();
             this.SuspendLayout();
             // 
             // lbMaHD
@@ -208,6 +213,14 @@
             this.btnIn.UseVisualStyleBackColor = true;
             this.btnIn.Click += new System.EventHandler(this.btnIn_Click);
             // 
+            // errorProviderSL
+            // 
+            this.errorProviderSL.ContainerControl = this;
+            // 
+            // errorProviderGB
+            // 
+            this.errorProviderGB.ContainerControl = this;
+            // 
             // CTHoaDonBan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -235,6 +248,8 @@
             this.Text = "CTHoaDonBan";
             this.Load += new System.EventHandler(this.CTHoaDonBan_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCTHDB)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderSL)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderGB)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -260,5 +275,7 @@
         private System.Windows.Forms.Label lbGB;
         private System.Windows.Forms.TextBox tbGB;
         private System.Windows.Forms.Button btnIn;
+        private System.Windows.Forms.ErrorProvider errorProviderSL;
+        private System.Windows.Forms.ErrorProvider errorProviderGB;
     }
 }
