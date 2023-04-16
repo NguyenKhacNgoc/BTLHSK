@@ -1,47 +1,47 @@
 ﻿create DATABASE ThietBiMayTinh
 
 CREATE TABLE tblNhanVien (
-iMaNV INT,
+iMaNV INT NOT NULL,
 sTen NVARCHAR(30) PRIMARY KEY NOT NULL,
-sSDT VARCHAR(20)
+sSDT VARCHAR(20) NOT NULL
 )
 
 CREATE TABLE tblMatHang (
 iMaMH INT PRIMARY KEY NOT NULL,
-sTenLH NVARCHAR(30),
-sMauSac NVARCHAR(30),
-iSoLuong INT DEFAULT(0)
+sTenLH NVARCHAR(30) NOT NULL,
+sMauSac NVARCHAR(30) NOT NULL,
+iSoLuong INT DEFAULT(0) NOT NULL
 )
 
 CREATE TABLE tblHoaDonNhap(
 iMaHD INT PRIMARY KEY NOT NULL,
-sTenNV NVARCHAR(30),
-sNCC NVARCHAR(30),
+sTenNV NVARCHAR(30) NOT NULL,
+sNCC NVARCHAR(30) NOT NULL,
 dNgayTao DATE,
 fTongTien FLOAT DEFAULT(0)
 )
-
-
 CREATE TABLE tblHoaDonBan (
 iMaHD INT PRIMARY KEY NOT NULL,
-sTenNV NVARCHAR(30),
-dNgayTao DATE,
+sTenNV NVARCHAR(30) NOT NULL,
+dNgayTao DATE NOT NULL,
 fTongTien FLOAT DEFAULT(0)
 )
+
 CREATE TABLE tblCTHoaDonNhap (
 iMaHD INT NOT NULL,
 iMaMH INT NOT NULL,
-iSoLuong INT,
-fDonGia FLOAT,
+iSoLuong INT NOT NULL,
+fDonGia FLOAT NOT NULL,
 fThanhTien FLOAT DEFAULT(0)
 )
+
 CREATE TABLE tblCTHoaDonBan (
 iMaHD INT NOT NULL,
 iMaMH INT NOT NULL,
-iSoLuong INT,
-fGiaBan FLOAT,
-iThoiGianBaoHanh INT,
-sGhiChu NVARCHAR(30),
+iSoLuong INT NOT NULL,
+fGiaBan FLOAT NOT NULL,
+iThoiGianBaoHanh INT NOT NULL,
+sGhiChu NVARCHAR(30) NOT NULL,
 fThanhTien FLOAT DEFAULT(0)
 )
 
@@ -115,65 +115,6 @@ ALTER TABLE dbo.tblCTHoaDonBan ADD FOREIGN KEY (iMaHD) REFERENCES dbo.tblHoaDonB
 ALTER TABLE dbo.tblCTHoaDonBan ADD FOREIGN KEY(iMaMH) REFERENCES dbo.tblMatHang(iMaMH) ON DELETE CASCADE
 ALTER TABLE dbo.tblCTHoaDonNhap ADD CONSTRAINT PK_CTHDN PRIMARY KEY(iMaHD, iMaMH)
 ALTER TABLE dbo.tblCTHoaDonBan ADD CONSTRAINT PK_CTHDB PRIMARY KEY(iMaHD, iMaMH)
-CREATE PROC ThemHoaDonBan(
-@MaHD INT, @TenNV nvarchar(30), @NgayTao date)
-AS
-INSERT INTO dbo.tblHoaDonBan
-(
-    iMaHD,
-	sTenNV,
-    dNgayTao
-   
-)
-VALUES
-(   @MaHD, @TenNV, @NgayTao
-    )
-
-
-
-
-CREATE PROC SuaHoaDonBan(
-@MaHD INT, @NgayTao date)
-AS
-UPDATE dbo.tblHoaDonBan SET dNgayTao = @NgayTao WHERE iMaHD = @MaHD
-
-CREATE PROC XoaHoaDonBan (
-@MaHD INT )
-AS
-DELETE dbo.tblHoaDonBan WHERE iMaHD = @MaHD
-
-
-
-CREATE PROC ThemCTHDB (
-@MaHD INT, @MaMH INT, @SoLuong int, @GiaBan float, @TGBH int, @GhiChu nvarchar(30)
-)
-AS
-INSERT INTO dbo.tblCTHoaDonBan
-(
-    iMaHD,
-    iMaMH,
-    iSoLuong,
-	fGiaBan,
-    iThoiGianBaoHanh,
-    sGhiChu
-   
-)
-VALUES
-(   @MaHD, @MaMH, @SoLuong, @GiaBan, @TGBH, @GhiChu
-   
-    )
-
-CREATE PROC SuaCTHDB ( @MaHD INT, @MaMH INT, @SoLuong int, @GiaBan float, @TGBH int, @GhiChu nvarchar(30))
-AS
-UPDATE dbo.tblCTHoaDonBan SET iSoLuong = @SoLuong WHERE iMaHD = @MaHD AND iMaMH = @MaMH
-UPDATE dbo.tblCTHoaDonBan SET fGiaBan = @GiaBan WHERE iMaHD = @MaHD AND iMaMH = @MaMH
-UPDATE dbo.tblCTHoaDonBan SET iThoiGianBaoHanh = @TGBH WHERE iMaHD = @MaHD AND iMaMH = @MaMH
-UPDATE dbo.tblCTHoaDonBan SET sGhiChu = @GhiChu WHERE iMaHD = @MaHD AND iMaMH = @MaMH
-
-CREATE PROC XoaCTHDB (@MaHD int , @MaMH int )
-AS
-DELETE dbo.tblCTHoaDonBan WHERE iMaHD = @MaHD AND iMaMH = @MaMH
-
 CREATE VIEW v_NV
 AS
 SELECT iMaNV AS[Mã NV], sTen AS[Tên], sSDT AS[Số điện thoại] FROM dbo.tblNhanVien
@@ -198,51 +139,6 @@ CREATE VIEW v_CTHDN
 AS
 SELECT iMaHD AS[Mã hoá đơn], iMaMH AS[Mã mặt hàng], iSoLuong AS[Số lượng], fDonGia AS[Đơn giá], fThanhTien AS[Thành tiền] FROM dbo.tblCTHoaDonNhap
 
-CREATE PROC ThemNV(@MaNV INT, @Ten nvarchar(30), @SDT varchar(20))
-As
-INSERT INTO	 dbo.tblNhanVien
-(
-    iMaNV,
-    sTen,
-    sSDT
-)
-VALUES
-(   @MaNV, @Ten, @SDT
-    )
-
-CREATE PROC SuaTenNV (@MaNV INT, @Ten NVARCHAR(30))
-AS
-UPDATE dbo.tblNhanVien SET sTen =@Ten WHERE iMaNV = @MaNV
-
-CREATE PROC XoaNV (@MaNV int)
-AS
-DELETE dbo.tblNhanVien WHERE iMaNV = @MaNV
-
-
-
-
-
-INSERT INTO dbo.tblCTHoaDonBan
-(
-    iMaHD,
-    iMaMH,
-    iSoLuong,
-    iThoiGianBaoHanh,
-    sGhiChu,
-    fThanhTien
-)
-VALUES
-(   4,      -- iMaHD - int
-    1,      -- iMaMH - int
-    5000,   -- iSoLuong - int
-    5,   -- iThoiGianBaoHanh - int
-    NULL,   -- sGhiChu - nvarchar(30)
-    DEFAULT -- fThanhTien - float
-    )
-
-SELECT * FROM dbo.tblCTHoaDonBan
-SELECT * FROM dbo.tblMatHang
-
 ALTER TRIGGER tr_sl1
 ON tblCTHoaDonBan 
 FOR INSERT, UPDATE 
@@ -256,7 +152,6 @@ BEGIN
 	ROLLBACK TRAN
 	END
 END
-
 
 CREATE TRIGGER tg_SL_Nhap
 ON tblCTHoaDonNhap
@@ -296,7 +191,6 @@ BEGIN
 	    ROLLBACK TRAN
 	END
 END
-
 
 CREATE PROC xemTTHH (@MaHD int, @MaMH int)
 AS
