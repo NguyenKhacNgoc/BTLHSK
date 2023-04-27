@@ -34,7 +34,7 @@
             this.lbNT = new System.Windows.Forms.Label();
             this.tbMaHD = new System.Windows.Forms.TextBox();
             this.tbNCC = new System.Windows.Forms.TextBox();
-            this.cbTenNV = new System.Windows.Forms.ComboBox();
+            this.cbNV = new System.Windows.Forms.ComboBox();
             this.dateTimePickerNT = new System.Windows.Forms.DateTimePicker();
             this.dataGridViewHDN = new System.Windows.Forms.DataGridView();
             this.btnThem = new System.Windows.Forms.Button();
@@ -59,9 +59,9 @@
             this.lbTenNV.AutoSize = true;
             this.lbTenNV.Location = new System.Drawing.Point(30, 84);
             this.lbTenNV.Name = "lbTenNV";
-            this.lbTenNV.Size = new System.Drawing.Size(91, 16);
+            this.lbTenNV.Size = new System.Drawing.Size(86, 16);
             this.lbTenNV.TabIndex = 1;
-            this.lbTenNV.Text = "Tên nhân viên";
+            this.lbTenNV.Text = "Mã nhân viên";
             // 
             // lbNCC
             // 
@@ -95,13 +95,13 @@
             this.tbNCC.Size = new System.Drawing.Size(100, 22);
             this.tbNCC.TabIndex = 5;
             // 
-            // cbTenNV
+            // cbNV
             // 
-            this.cbTenNV.FormattingEnabled = true;
-            this.cbTenNV.Location = new System.Drawing.Point(150, 75);
-            this.cbTenNV.Name = "cbTenNV";
-            this.cbTenNV.Size = new System.Drawing.Size(121, 24);
-            this.cbTenNV.TabIndex = 6;
+            this.cbNV.FormattingEnabled = true;
+            this.cbNV.Location = new System.Drawing.Point(150, 75);
+            this.cbNV.Name = "cbNV";
+            this.cbNV.Size = new System.Drawing.Size(121, 24);
+            this.cbNV.TabIndex = 6;
             // 
             // dateTimePickerNT
             // 
@@ -183,7 +183,7 @@
             this.Controls.Add(this.btnThem);
             this.Controls.Add(this.dataGridViewHDN);
             this.Controls.Add(this.dateTimePickerNT);
-            this.Controls.Add(this.cbTenNV);
+            this.Controls.Add(this.cbNV);
             this.Controls.Add(this.tbNCC);
             this.Controls.Add(this.tbMaHD);
             this.Controls.Add(this.lbNT);
@@ -215,6 +215,6 @@
         private System.Windows.Forms.Button btnTK;
         private System.Windows.Forms.Button btnXemCT;
         private System.Windows.Forms.Label lbTenNV;
-        private System.Windows.Forms.ComboBox cbTenNV;
+        private System.Windows.Forms.ComboBox cbNV;
     }
 }

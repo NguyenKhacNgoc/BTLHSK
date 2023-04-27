@@ -29,7 +29,7 @@ namespace BTLHSK
         private void ComboboxTenNV()
         {
             sql sql = new sql();
-            sql.combobox("select sTen from tblNhanVien", "sTen", cbTenNV);
+            sql.combobox("select iMaNV from tblNhanVien", "iMaNV", cbNV);
         }
         private void HienHoaDonBan (object sender, EventArgs e)
         {
@@ -47,10 +47,10 @@ namespace BTLHSK
             try
             {
                 sql sql = new sql();
-                SqlCommand cmd = sql.EDIT("INSERT INTO dbo.tblHoaDonBan(iMaHD,sTenNV,dNgayTao) VALUES(@MaHD, @TenNV, @NgayTao)");
+                SqlCommand cmd = sql.EDIT("INSERT INTO dbo.tblHoaDonBan(iMaHD,iMaNV,dNgayTao) VALUES(@MaHD, @MaNV, @NgayTao)");
                 cmd.Parameters.AddWithValue("@MaHD", tbMaHD.Text);
-                cmd.Parameters.AddWithValue("@TenNV", cbTenNV.Text);
-                cmd.Parameters.AddWithValue("@NgayTao", dateTimePickerNgayTao.Text);
+                cmd.Parameters.AddWithValue("@MaNV", cbNV.Text);
+                cmd.Parameters.AddWithValue("@NgayTao", Convert.ToDateTime(dateTimePickerNgayTao.Text));
                 int i = cmd.ExecuteNonQuery();
                 if (i > 0) HienHoaDonBan(sender, e);
             }

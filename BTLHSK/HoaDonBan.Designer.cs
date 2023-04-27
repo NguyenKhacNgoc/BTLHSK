@@ -34,7 +34,7 @@
             this.tbMaHD = new System.Windows.Forms.TextBox();
             this.dateTimePickerNgayTao = new System.Windows.Forms.DateTimePicker();
             this.dataGridViewHDB = new System.Windows.Forms.DataGridView();
-            this.cbTenNV = new System.Windows.Forms.ComboBox();
+            this.cbNV = new System.Windows.Forms.ComboBox();
             this.btnThem = new System.Windows.Forms.Button();
             this.btnSua = new System.Windows.Forms.Button();
             this.btnXoa = new System.Windows.Forms.Button();
@@ -57,9 +57,9 @@
             this.lbTenNV.AutoSize = true;
             this.lbTenNV.Location = new System.Drawing.Point(250, 24);
             this.lbTenNV.Name = "lbTenNV";
-            this.lbTenNV.Size = new System.Drawing.Size(91, 16);
+            this.lbTenNV.Size = new System.Drawing.Size(86, 16);
             this.lbTenNV.TabIndex = 1;
-            this.lbTenNV.Text = "Tên nhân viên";
+            this.lbTenNV.Text = "Mã nhân viên";
             // 
             // lbNgayTao
             // 
@@ -95,13 +95,13 @@
             this.dataGridViewHDB.TabIndex = 6;
             this.dataGridViewHDB.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewHDB_CellClick);
             // 
-            // cbTenNV
+            // cbNV
             // 
-            this.cbTenNV.FormattingEnabled = true;
-            this.cbTenNV.Location = new System.Drawing.Point(347, 21);
-            this.cbTenNV.Name = "cbTenNV";
-            this.cbTenNV.Size = new System.Drawing.Size(121, 24);
-            this.cbTenNV.TabIndex = 7;
+            this.cbNV.FormattingEnabled = true;
+            this.cbNV.Location = new System.Drawing.Point(347, 21);
+            this.cbNV.Name = "cbNV";
+            this.cbNV.Size = new System.Drawing.Size(121, 24);
+            this.cbNV.TabIndex = 7;
             // 
             // btnThem
             // 
@@ -163,7 +163,7 @@
             this.Controls.Add(this.btnXoa);
             this.Controls.Add(this.btnSua);
             this.Controls.Add(this.btnThem);
-            this.Controls.Add(this.cbTenNV);
+            this.Controls.Add(this.cbNV);
             this.Controls.Add(this.dataGridViewHDB);
             this.Controls.Add(this.dateTimePickerNgayTao);
             this.Controls.Add(this.tbMaHD);
@@ -187,7 +187,7 @@
         private System.Windows.Forms.TextBox tbMaHD;
         private System.Windows.Forms.DateTimePicker dateTimePickerNgayTao;
         private System.Windows.Forms.DataGridView dataGridViewHDB;
-        private System.Windows.Forms.ComboBox cbTenNV;
+        private System.Windows.Forms.ComboBox cbNV;
         private System.Windows.Forms.Button btnThem;
         private System.Windows.Forms.Button btnSua;
         private System.Windows.Forms.Button btnXoa;

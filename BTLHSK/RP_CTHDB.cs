@@ -32,6 +32,7 @@ namespace BTLHSK
             sql sql = new sql();
             SqlCommand cmd = sql.EDIT("exec RP_CT_HDB @MaHD");
             cmd.Parameters.AddWithValue("@MaHD", MaHD);
+
             SqlDataAdapter da = new SqlDataAdapter(cmd);   
             DataTable dt = new System.Data.DataTable();
             da.Fill(dt);

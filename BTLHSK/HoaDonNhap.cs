@@ -29,7 +29,7 @@ namespace BTLHSK
         private void CB(object sender, EventArgs e)
         {
             sql sql = new sql();
-            sql.combobox("select sTen from tblNhanVien", "sTen", cbTenNV);
+            sql.combobox("select iMaNV from tblNhanVien", "iMaNV", cbNV);
 
         }
         
@@ -49,11 +49,11 @@ namespace BTLHSK
             try
             {
                 sql sql = new sql();
-                SqlCommand cmd = sql.EDIT("insert into tblHoaDonNhap (iMaHD, sTenNV, sNCC, dNgayTao) values (@MaHD, @TenNV, @NCC, @NgayTao)");
+                SqlCommand cmd = sql.EDIT("insert into tblHoaDonNhap (iMaHD, iMaNV, sNCC, dNgayTao) values (@MaHD, @MaNV, @NCC, @NgayTao)");
                 cmd.Parameters.AddWithValue("@MaHD", tbMaHD.Text);
-                cmd.Parameters.AddWithValue("@TenNV", cbTenNV.Text);
+                cmd.Parameters.AddWithValue("@MaNV", cbNV.Text);
                 cmd.Parameters.AddWithValue("@NCC", tbNCC.Text);
-                cmd.Parameters.AddWithValue("@NgayTao", dateTimePickerNT.Text);
+                cmd.Parameters.AddWithValue("@NgayTao", Convert.ToDateTime(dateTimePickerNT.Text));
                 if (cmd.ExecuteNonQuery() > 0) HienHDN(sender, e);
             }catch(Exception ex)
             {
@@ -67,9 +67,9 @@ namespace BTLHSK
             {
                 sql sql = new sql();
                 sql.ketnoi();
-                SqlCommand cmd = sql.EDIT("update tblHoaDonNhap set sNCC = @NCC where iMaHD = @MaHD and sTenNV = @TenNV");
+                SqlCommand cmd = sql.EDIT("update tblHoaDonNhap set sNCC = @NCC where iMaHD = @MaHD and iMaNV = @MaNV");
                 cmd.Parameters.AddWithValue("@MaHD", tbMaHD.Text);
-                cmd.Parameters.AddWithValue("@TenNV", cbTenNV.Text);
+                cmd.Parameters.AddWithValue("@MaNV", cbNV.Text);
                 cmd.Parameters.AddWithValue("@NCC", tbNCC.Text);
                 if (cmd.ExecuteNonQuery() > 0) HienHDN(sender, e);
 
@@ -84,9 +84,9 @@ namespace BTLHSK
             try
             {
                 sql sql = new sql();
-                SqlCommand cmd = sql.EDIT("delete tblHoaDonNhap where iMaHD = @MaHD AND sTenNV = @TenNV");
+                SqlCommand cmd = sql.EDIT("delete tblHoaDonNhap where iMaHD = @MaHD AND iMaNV = @MaNV");
                 cmd.Parameters.AddWithValue("@MaHD", tbMaHD.Text);
-                cmd.Parameters.AddWithValue("@TenNV", cbTenNV.Text);
+                cmd.Parameters.AddWithValue("@MaNV", cbNV.Text);
                 if(cmd.ExecuteNonQuery() > 0) HienHDN(sender,e);
 
             }
@@ -99,7 +99,7 @@ namespace BTLHSK
         private void dataGridViewHDN_CellClick(object sender, DataGridViewCellEventArgs e)
         {
                 tbMaHD.Text = dataGridViewHDN.CurrentRow.Cells["Mã hoá đơn"].Value.ToString();
-                cbTenNV.Text = dataGridViewHDN.CurrentRow.Cells["Tên nhân viên"].Value.ToString();
+                cbNV.Text = dataGridViewHDN.CurrentRow.Cells["Tên nhân viên"].Value.ToString();
         }
 
         private void btnTK_Click(object sender, EventArgs e)

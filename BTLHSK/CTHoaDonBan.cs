@@ -56,7 +56,7 @@ namespace BTLHSK
         }
         private void btnThem_Click(object sender, EventArgs e)
         {
- 
+
             try
             {
                 if (Convert.ToInt32(tbSL.Text) <= 0)

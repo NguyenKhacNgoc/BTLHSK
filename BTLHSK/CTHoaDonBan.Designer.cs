@@ -143,15 +143,15 @@
             this.dataGridViewCTHDB.Name = "dataGridViewCTHDB";
             this.dataGridViewCTHDB.RowHeadersWidth = 51;
             this.dataGridViewCTHDB.RowTemplate.Height = 24;
-            this.dataGridViewCTHDB.Size = new System.Drawing.Size(750, 422);
+            this.dataGridViewCTHDB.Size = new System.Drawing.Size(997, 422);
             this.dataGridViewCTHDB.TabIndex = 12;
             this.dataGridViewCTHDB.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewCTHDB_CellClick);
             // 
             // btnThem
             // 
-            this.btnThem.Location = new System.Drawing.Point(28, 271);
+            this.btnThem.Location = new System.Drawing.Point(28, 288);
             this.btnThem.Name = "btnThem";
-            this.btnThem.Size = new System.Drawing.Size(91, 58);
+            this.btnThem.Size = new System.Drawing.Size(91, 54);
             this.btnThem.TabIndex = 13;
             this.btnThem.Text = "Thêm";
             this.btnThem.UseVisualStyleBackColor = true;
@@ -159,9 +159,9 @@
             // 
             // btnXoa
             // 
-            this.btnXoa.Location = new System.Drawing.Point(28, 358);
+            this.btnXoa.Location = new System.Drawing.Point(28, 366);
             this.btnXoa.Name = "btnXoa";
-            this.btnXoa.Size = new System.Drawing.Size(91, 53);
+            this.btnXoa.Size = new System.Drawing.Size(91, 51);
             this.btnXoa.TabIndex = 15;
             this.btnXoa.Text = "Xoá";
             this.btnXoa.UseVisualStyleBackColor = true;
@@ -169,9 +169,9 @@
             // 
             // btnTK
             // 
-            this.btnTK.Location = new System.Drawing.Point(166, 276);
+            this.btnTK.Location = new System.Drawing.Point(186, 288);
             this.btnTK.Name = "btnTK";
-            this.btnTK.Size = new System.Drawing.Size(96, 53);
+            this.btnTK.Size = new System.Drawing.Size(96, 54);
             this.btnTK.TabIndex = 16;
             this.btnTK.Text = "Tìm Kiếm";
             this.btnTK.UseVisualStyleBackColor = true;
@@ -179,9 +179,9 @@
             // 
             // btnXem
             // 
-            this.btnXem.Location = new System.Drawing.Point(166, 358);
+            this.btnXem.Location = new System.Drawing.Point(186, 366);
             this.btnXem.Name = "btnXem";
-            this.btnXem.Size = new System.Drawing.Size(98, 49);
+            this.btnXem.Size = new System.Drawing.Size(98, 51);
             this.btnXem.TabIndex = 17;
             this.btnXem.Text = "Xem tất cả";
             this.btnXem.UseVisualStyleBackColor = true;
@@ -205,7 +205,7 @@
             // 
             // btnIn
             // 
-            this.btnIn.Location = new System.Drawing.Point(87, 434);
+            this.btnIn.Location = new System.Drawing.Point(88, 423);
             this.btnIn.Name = "btnIn";
             this.btnIn.Size = new System.Drawing.Size(108, 41);
             this.btnIn.TabIndex = 20;
@@ -225,7 +225,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1121, 487);
+            this.ClientSize = new System.Drawing.Size(1339, 487);
             this.Controls.Add(this.btnIn);
             this.Controls.Add(this.tbGB);
             this.Controls.Add(this.lbGB);
